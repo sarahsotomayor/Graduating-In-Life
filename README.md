@@ -33,4 +33,5 @@ Event "prom" planner application for a community of Assisted Living or Nursing H
 
 ## Wireframe Image: 
 
+![wireframe image](/wireframe.png)
 
