@@ -7,6 +7,11 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='style.css') }}"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graduating in life</title>
@@ -49,7 +54,11 @@
       <header>
         <h1>Graduating in Life</h1>
       </header>
-      <img src="" alt=" Old Couple Celebrating" />
+      <img
+        class="home-img"
+        src="../static/images/pexels-alena-darmel-8153998.jpg"
+        alt=" Couple Celebrating"
+      />
       <p>
         Inspired by news from the BBC "The Happy Podcast, our focus is to
         promote opportunities for the senior members of our communities to
