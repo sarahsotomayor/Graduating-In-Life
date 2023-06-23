@@ -12,6 +12,13 @@
       type="text/css"
       href="{{ url_for('static',filename='style.css') }}"
     />
+        <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graduating in life</title>
@@ -20,7 +27,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">GIL Events</a>
+          <a class="navbar-brand" href="#">GIL</a>
           <!-- suggestion as logo can be just Home -->
           <button
             class="navbar-toggler"
@@ -50,10 +57,58 @@
             </ul>
           </div>
         </div>
-      </nav>
+      </nav> 
     </div>
+        
     <header>
-      <h1>Create a new Senior Prom</h1>
+      <h1 class="home-header">Create a New Senior Prom Event</h1>
     </header>
+    <!-- ********          Create Form       *********  -->
+    <!-- event name location date time description -->
+    <div>
+  <form 
+            action="/create"
+            class="  mt-5 mb-5 ms-5 me-5 create-form"
+            method="post"
+          >
+            <div class="">
+              <label for="name" class="form-label">Event Name</label>
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                id="event_name"
+              />
+            </div>
+            <div class="">
+              <label for="location" class="form-label">Location</label>
+              <textarea
+                type="text"
+                name="location"
+                class="form-control"
+                id="location"
+              ></textarea>
+            </div>
+             <div class="">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                type="text area"
+                name="description"
+                class="form-control"
+              ></textarea>
+            </div>
+            <div class="mt-5 mb-5">
+               <label for="date" class="form-label">Date </label>
+            <input type="date" name="date">
+            </div>
+            <div class="mt-5 mb-5">
+                <label for="time">Select a time:</label>
+<input type="time" id="time" name="time">
+            </div>
+            <button  
+                class="btn btn-secondary  ms-5">Create</button>
+           
+            </div>
+    </div>
   </body>
 </html>

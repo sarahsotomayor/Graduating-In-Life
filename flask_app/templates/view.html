@@ -12,15 +12,22 @@
       type="text/css"
       href="{{ url_for('static',filename='style.css') }}"
     />
+        <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graduating in life</title>
   </head>
   <body>
-    <div class="container">
+    
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">GIL Events</a>
+          <a class="navbar-brand" href="#">GIL </a>
           <!-- suggestion as logo can be just Home -->
           <button
             class="navbar-toggler"
@@ -51,6 +58,53 @@
           </div>
         </div>
       </nav>
+
+
+
+<div class="container">
+       <h1 class="home-header">Graduating in Life</h1>
+      </header>
+      <div class="home-main">
+      
+        <div class="home-p col-5">
+
+        <h3 class="mb-5 mt-5 ">{{view_event.name}}</h3>
+        <p>event organizer: {{}}</p>
+          <form 
+            action="/view/{{id}}"
+            class=" mt-5 mb-5"
+            method="post"
+           >
+            <div class="">
+              <label for="recipe_name" class="form-label">Location</label>
+              <p>{{view.location}}</p>
+            </div>
+            <div class="">
+              <label for="description" class="form-label">Description</label>
+            <p>{{view.description}}</p>
+            </div>
+            
+              <label for="date" class="form-label">
+                date
+              </label>
+              <p>{view.date}</p>
+                <div class="">
+              <label for="time" class="form-label">Time</label>
+              <p>{{view.time}}</p>
+<button class="btn btn-secondary">Sign up for this event</button>
+        </form>  
+       </div>  
+       </div>
+        <img
+          class="home-img "
+          src="../static/images/john-moeses-bauan-8YVaEljM-9I-unsplash.jpg"
+          alt=" Couple dancing outdoors"
+        />
+       
     </div>
+</div>
+
+
+</div>
   </body>
 </html>

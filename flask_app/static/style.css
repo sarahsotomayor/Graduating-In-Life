@@ -7,7 +7,9 @@ body {
   /* background-position: 0%; */
   /* background: rgb(254, 197, 197); */
 }
-
+.container {
+  margin: 0 auto;
+}
 .home-header {
   font-family: "Prata", serif;
   padding: 20px;
@@ -33,4 +35,7 @@ body {
 }
 .home-btn {
   padding: 10px;
+}
+.create-form {
+  margin: 30px;
 }

@@ -20,7 +20,7 @@
     <div class="container">
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">GIL Events</a>
+          <a class="navbar-brand" href="#">GIL </a>
           <!-- suggestion as logo can be just Home -->
           <button
             class="navbar-toggler"
@@ -52,8 +52,39 @@
         </div>
       </nav>
       <header>
-        <h1>List of Available Events</h1>
+        <h1 class="home-header">List of Available Events</h1>
       </header>
+      <h3 class="mt-5 mb-5">Welcome, {{one_user.first_name}}</h3>
+
+      <!-- table-->
+      <table class="table table-hover mt-5 mb-5">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col">Event Name</th>
+            <th scope="col">Event Details</th>
+
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <!-- !!!!Names may have to change to match backend!!!!!-->
+        <tbody>
+          {% for one_event in events %}
+          <tr>
+            <th scope="row">{{one_event.name}}</th>
+            <td>{{one_event.details}}</td>
+
+            <td>
+              <a href="/view/{{one_event.id}}">View </a>| {% if
+              session['user_id'] == one_event.user.id %}
+              <a href="/edit/{{one_event.id}}">Edit </a>|
+
+              <a href="/delete/{{one_event.id}}">Delete</a>
+              {% endif %}
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
