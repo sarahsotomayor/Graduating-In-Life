@@ -26,6 +26,7 @@ body {
   width: 34%;
   height: 34%;
   margin: auto;
+  border-radius: 8px;
 }
 .home-p {
   font-size: 18px;
