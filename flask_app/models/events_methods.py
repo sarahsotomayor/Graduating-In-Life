@@ -69,3 +69,5 @@ def destroy(cls, data):
     query = """
         DELETE FROM events where id = %(id)s;
     """
+
+    
