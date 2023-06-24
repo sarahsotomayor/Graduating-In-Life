@@ -19,7 +19,7 @@ Event "prom" planner application for a community of Assisted Living or Nursing H
 
 * Front-End (Views): Josie
 * Back-End (Models as well as Database/Schema & Configuration): Leif
-* Back-End (Controllers)
+* Back-End (Controllers): Sarah
 
 ## Features
 
