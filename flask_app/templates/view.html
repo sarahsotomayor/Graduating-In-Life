@@ -25,39 +25,42 @@
   </head>
   <body>
     
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">GIL </a>
-          <!-- suggestion as logo can be just Home -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Create Event</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-              </li>
-            </ul>
-          </div>
+      <nav
+      class="navbar navbar-expand-lg bg-light navSize"
+      style="background-color: #8c757b"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">GIL</a>
+        <!-- suggestion as logo can be just Home -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events/new">Create Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
 
 
 
@@ -68,29 +71,30 @@
       
         <div class="home-p col-5">
 
-        <h3 class="mb-5 mt-5 ">{{view_event.name}}</h3>
+        <h3 class="mb-5 mt-5 ">{{event.name}}</h3>
         <p>event organizer: {{}}</p>
+        <!--  ^ want to implement this? -->
           <form 
-            action="/view/{{id}}"
+            action="/event/{{id}}"
             class=" mt-5 mb-5"
             method="post"
            >
             <div class="">
               <label for="recipe_name" class="form-label">Location</label>
-              <p>{{view.location}}</p>
+              <p>{{event.location}}</p>
             </div>
             <div class="">
               <label for="description" class="form-label">Description</label>
-            <p>{{view.description}}</p>
+            <p>{{event.description}}</p>
             </div>
             
               <label for="date" class="form-label">
                 date
               </label>
-              <p>{view.date}</p>
+              <p>{event.date}</p>
                 <div class="">
               <label for="time" class="form-label">Time</label>
-              <p>{{view.time}}</p>
+              <p>{{event.time}}</p>
 <button class="btn btn-secondary">Sign up for this event</button>
         </form>  
        </div>  

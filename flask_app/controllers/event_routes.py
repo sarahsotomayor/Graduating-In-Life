@@ -8,7 +8,7 @@ from flask_app.models import events_methods, user_methods
 def index():
     return render_template("homepage.html")
 
-#Read
+#Read All
 # todo add events template showing all events
 # Show All Events
 @app.route("/events")
@@ -16,7 +16,7 @@ def all_events():
     data = {
         "id" : session['user_id'],
     }
-    return render_template("", all_events = events_methods.Events.get_all_events())
+    return render_template("events.html", all_events = events_methods.Events.get_all_events())
 
 #Render Create
 # todo add new event form template
@@ -48,7 +48,7 @@ def create_event_process():
     print("Event Saved", "request.form", request.form)
     return redirect("/events")
 
-#Read
+#Read One
 # todo need get_one_event method in events_methods.py
 # todo add view event template
 # View Event: user can only view event details if logged in
