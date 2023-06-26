@@ -71,23 +71,26 @@
         </thead>
         <!-- !!!!Names may have to change to match backend!!!!!-->
         <tbody>
-          {% for one_event in all_events %}
+          {% for event in all_events %}
           <tr>
-            <th scope="row">{{one_event.name}}</th>
-            <td>{{one_event.description}}</td>
+            <th scope="row">{{event.name}}</th>
+            <td>{{event.description}}</td>
 
             <td>
-              <a href="/view/{{one_event.events.id}}">View </a>| {% if
-              session['user_id'] == one_event.user.id %} user or users?
-              <a href="/edit/{{one_event.events.id}}">Edit </a>|
+              <a href="/view/{{event.id}}">View </a>| 
+              {% if session['user_id'] == event.user.id %}
+              <a href="/edit/{{event.id}}">Edit </a>|
 
-              <a href="/delete/{{one_event.events.id}}">Delete</a>
+              <a href="/delete/{{event.id}}">Delete</a>
               {% endif %}
             </td>
           </tr>
           {%endfor%}
         </tbody>
-    </table>
-</div>
-</body>
+      </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+  </body>
 </html>

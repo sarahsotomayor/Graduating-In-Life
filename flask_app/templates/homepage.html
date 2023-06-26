@@ -20,13 +20,13 @@
       rel="stylesheet"
     />
 
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graduating in life</title>
   </head>
   <body>
-
+    <!-- Having issues with Navbar. Icon won't expand and display links when hamburger is visible. Seems the problem 
+      comes from  Bootstrap new update. Can't find solution-->
     <nav
       class="navbar navbar-expand-lg bg-light navSize"
       style="background-color: #8c757b"
@@ -46,53 +46,57 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/events">Events</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/events/new">Create Event</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class="container">
-        <header>
-          <h1 class="home-header">Graduating in Life</h1>
-        </header>
-        <div class="home-main">
-          <img
-            class="home-img col-5"
-            src="../static/images/pexels-alena-darmel-8153998.jpg"
-            alt=" three people standing celebrating"
-          />
-          <div class="home-p col-5">
-            <p>
-              Inspired by news from the BBC "The Happy Podcast, our focus is to
-              promote opportunities for the senior members of our communities to
-              celebrate life. Here administrators of senior living communities
-              and/or other inspired members of our society can create events that
-              resemble a high school senior prom for those who could actually have
-              graduated twice over.
-            </p>
-            <p>
-              Seniors attending are encourage to bring photos or other small items
-              to share from the days they were in school.
-            </p>
-            <p>
-              If you would like to see the events we have available or you felt
-              inspired and want to promote an event, please Login or Register.
-            </p>
-            <a href="/register" class="btn btn-secondary home-btn">Register</a>
-          </div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events/new">Create Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </body>
-  </html>
+    </nav>
+    <div class="container">
+      <header>
+        <h1 class="home-header">Graduating in Life</h1>
+      </header>
+      <div class="home-main">
+        <img
+          class="home-img col-5"
+          src="../static/images/pexels-alena-darmel-8153998.jpg"
+          alt=" three people standing celebrating"
+        />
+        <div class="home-p col-5">
+          <p>
+            Inspired by news from the BBC "The Happy Podcast, our focus is to
+            promote opportunities for the senior members of our communities to
+            celebrate life. Here administrators of senior living communities
+            and/or other inspired members of our society can create events that
+            resemble a high school senior prom for those who could actually have
+            graduated twice over.
+          </p>
+          <p>
+            Seniors attending are encourage to bring photos or other small items
+            to share from the days they were in school.
+          </p>
+          <p>
+            If you would like to see the events we have available or you felt
+            inspired and want to promote an event, please Login or Register.
+          </p>
+          <a href="/register" class="btn btn-secondary home-btn">Register</a>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+  </body>
+</html>

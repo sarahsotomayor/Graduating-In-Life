@@ -2,40 +2,37 @@ from flask_app import app
 from flask import render_template, request, redirect, session, flash
 from flask_app.models import events_methods, user_methods
 
-# todo add homepage template
 # Homepage
 @app.route("/")
 def index():
     return render_template("homepage.html")
 
-
-# todo add events template showing all events
+#Read All
 # Show All Events
 @app.route("/events")
 def all_events():
     data = {
         "id" : session['user_id'],
     }
-    return render_template("", all_events = events_methods.Events.get_all_events())
+    return render_template("events.html", all_events = events_methods.Events.get_all_events())
 
-
-# todo add new event form template
+#Render Create
 # New Event Form
 @app.route("/events/new")
 def create_event():
     if 'user_id' not in session:
         return redirect("/")
-    return render_template(" ")
+    return render_template("create.html")
 
-
+#Create
 # Process New Event Form
 @app.route("/events/create", methods = ["POST"])
 def create_event_process():
     if 'user_id' not in session:
         return redirect("/")
     if not events_methods.Events.validate_event(request.form):
-        print("Could Not Save Recipe")
-        return redirect("/recipes/new")
+        print("Could Not Save Event")
+        return redirect("/events/new")
     data={
         "user_id" : session['user_id'],
         "name" : request.form['name'],
@@ -48,9 +45,7 @@ def create_event_process():
     print("Event Saved", "request.form", request.form)
     return redirect("/events")
 
-
-# todo need get_one_event method in events_methods.py
-# todo add view event template
+#Read One
 # View Event: user can only view event details if logged in
 @app.route("/events/<int:id>")
 def view_event(id):
@@ -60,10 +55,9 @@ def view_event(id):
     data = {
         "id" : id
     }
-    return render_template("", event = events_methods.Events.get_one_event(data))
+    return render_template("view.html", event = events_methods.Events.get_one_event(data))
 
-
-# todo need get_one_event method in events_methods.py
+#Render  Update
 # todo add edit event template
 # Edit Event: user can only edit event if logged in and user(admin) created event
 @app.route("/events/edit/<int:id>")
@@ -73,9 +67,9 @@ def edit_event(id):
     data = {
         "id" : id
     }
-    return render_template("", event = events_methods.Events.get_one_event(data))
+    return render_template("edit.html", event = events_methods.Events.get_one_event(data))
 
-
+#Update
 # Process Edit Event Form
 @app.route("/events/update/<int:id>", methods = ["POST"])
 def edit_event_process(id):
