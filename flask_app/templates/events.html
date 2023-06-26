@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='style.css') }}"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graduating in life</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">GIL </a>
+          <!-- suggestion as logo can be just Home -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Create Event</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <header>
+        <h1 class="home-header">List of Available Events</h1>
+      </header>
+      <h3 class="mt-5 mb-5">Welcome, {{one_user.first_name}}</h3>
+
+      <!-- table-->
+      <table class="table table-hover mt-5 mb-5">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col">Event Name</th>
+            <th scope="col">Event Details</th>
+
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <!-- !!!!Names may have to change to match backend!!!!!-->
+        <tbody>
+          {% for one_event in events %}
+          <tr>
+            <th scope="row">{{one_event.name}}</th>
+            <td>{{one_event.details}}</td>
+
+            <td>
+              <a href="/view/{{one_event.id}}">View </a>| {% if
+              session['user_id'] == one_event.user.id %}
+              <a href="/edit/{{one_event.id}}">Edit </a>|
+
+              <a href="/delete/{{one_event.id}}">Delete</a>
+              {% endif %}
+            </td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
