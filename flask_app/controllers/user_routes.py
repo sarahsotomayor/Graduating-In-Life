@@ -20,12 +20,12 @@ def register():
         "created_at":request.form["created_at"]
     }
     users_id = user_methods.Users.save(create_acc)
-    session["users_id"] = users_id
+    session["user_id"] = users_id
     return redirect("/events ")
 
 @app.route("/login")
 def logIn_user():
-    return render_template(" login.html")
+    return render_template("login.html")
 
 #todo redirect to the 
 @app.route("/login", methods=["POST"])
@@ -44,7 +44,7 @@ def logIn():
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")   
     session["users_id"] = logIn_acc.id
-    return redirect ("/events ")
+    return redirect ("/events")
 
 @app.route("/logout")
 def logout_user():
