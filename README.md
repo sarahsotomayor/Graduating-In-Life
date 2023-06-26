@@ -14,11 +14,18 @@ Event "prom" planner application for a community of Assisted Living or Nursing H
 * Database: MySQL
 * Tools: Flask 
 
+
+## Collaborations for MVC Structure
+
+* Front-End (Views): Josie
+* Back-End (Models as well as Database/Schema & Configuration): Leif
+* Back-End (Controllers): Sarah
+
 ## Features
 
 **MVP (Minimal Viable Product)**
 * Login & Registration 
-* Protected routes
+* Protected routes: only users can add, view details, & edit events
 * Validations and BCrypt
 * Full CRUD
 * One-to-Many relationship

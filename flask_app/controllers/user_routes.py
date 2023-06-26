@@ -45,3 +45,11 @@ def logIn():
         return redirect("/login")   
     session["users_id"] = logIn_acc.id
     return redirect (" ")
+
+@app.route("/logout")
+def logout_user():
+    if 'user_id' not in session:
+        return redirect("/")
+    session.clear()
+    print("User logged out")
+    return redirect("/")
