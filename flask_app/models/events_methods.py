@@ -64,10 +64,42 @@ def update_events(cls, data):
     """
     return connectToMySQL(db_schema).query_db(query,data)
 
+@classmethod
+def get_one_event(cls, data):
+    query = """
+        SELECT * FROM events 
+        JOIN users_has_events on users_has_events.event_id = users_has_events.user_id
+        LEFT JOIN users on users.id = users_has_events.user_id where events.id =%(id)s;
+    """
+    result = connectToMySQL(db_schema).query_db(query, data)
+    if result < 1: 
+        return False
+    
+    result = result[0]
+    one_event = Events({
+        "id":result["events.id"],
+        "name":result["name"],
+        "date":result["date"],
+        "time":result["time"],
+        "location":result["location"],
+        "description":result["description"],
+        "created_at":result["events.created_at"],
+        "updated_at":result["events.updated_at"],
+    })
+
+    event = Events(one_event)
+    for row in result: 
+        event.creator.append(cls(row))
+    return event
+
+
+
+
 @classmethod 
 def destroy(cls, data):
     query = """
         DELETE FROM events where id = %(id)s;
     """
+    return connectToMySQL(db_schema).query_db(query, data)
 
     

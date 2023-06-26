@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL 
 from flask import flash
+import re 
 regex_email = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 db_schema = "Graduation_In_Life"
@@ -67,5 +68,5 @@ class Users:
         if len(result) < 1: 
             return False
         return cls(result)
-        
+
 
