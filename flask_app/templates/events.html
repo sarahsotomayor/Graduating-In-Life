@@ -77,8 +77,8 @@
             <td>{{event.description}}</td>
 
             <td>
-              <a href="/events/view/{{event.id}}">View </a>| {% if
-              session['user_id'] == event.maker_id %}
+              <a href="/view/{{event.id}}">View </a>| {% if session['user_id']
+              == event.maker_id %}
               <a href="/events/edit/{{event.id}}">Edit </a>|
 
               <a href="/events/delete/{{event.id}}">Delete</a>

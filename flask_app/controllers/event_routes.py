@@ -49,7 +49,7 @@ def create_event_process():
 
 #Read One
 # View Event: user can only view event details if logged in
-@app.route("/events/view/<int:id>")
+@app.route("/view/<int:id>")
 def view_event(id):
     if 'user_id' not in session:
         return redirect("/")
