@@ -12,7 +12,7 @@
       type="text/css"
       href="{{ url_for('static',filename='style.css') }}"
     />
-        <link rel="stylesheet" type="text/css" href="../static/style.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="../static/style.css" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,7 +55,7 @@
               <a class="nav-link" href="/events/new">Create Event</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           </ul>
         </div>
@@ -72,37 +72,41 @@
         <div class="home-p col-5">
 
         <h3 class="mb-5 mt-5 ">{{event.name}}</h3>
-        <p>event organizer: {{}}</p>
-        <!--  ^ want to implement this? -->
+        <p>event organizer: {{event_organizer.first_name}}</p>
+       
           <form 
             action="/event/{{id}}"
             class=" mt-5 mb-5"
             method="post"
            >
-            <div class="">
-              <label for="recipe_name" class="form-label">Location</label>
-              <p>{{event.location}}</p>
-            </div>
-            <div class="">
-              <label for="description" class="form-label">Description</label>
-            <p>{{event.description}}</p>
-            </div>
             
-              <label for="date" class="form-label">
-                date
+              <label for="name" class="form-label">Location:</label>
+              <p>{{event.location}}</p>
+            
+           
+              <label for="description" class="form-label">Description:</label>
+           
+              
+            <p>{{event.description}}</p>
+          
+                 <label for="date" class="form-label">
+              Date:
               </label>
-              <p>{event.date}</p>
+               <p>{{event.date}}</p>
                 <div class="">
-              <label for="time" class="form-label">Time</label>
+              <label for="time" class="form-label">Time:</label>
               <p>{{event.time}}</p>
 <button class="btn btn-secondary">Sign up for this event</button>
         </form>  
        </div>  
        </div>
+       <div>
+        
+       </div>
         <img
           class="home-img "
           src="../static/images/john-moeses-bauan-8YVaEljM-9I-unsplash.jpg"
-          alt=" Couple dancing outdoors"
+          alt=" Couple dancing "
         />
        
     </div>

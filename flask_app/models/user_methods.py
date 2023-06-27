@@ -8,7 +8,7 @@ regex_email = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 bcrypt = Bcrypt(app)
 
-db_schema = "Graduation_In_Life"
+db_schema = "graduation_in_life"
 class Users: 
     def __init__(self, data):
         self.id = data["id"]
@@ -31,7 +31,7 @@ class Users:
     @classmethod
     def save(cls, data):
         query = """
-            INSERT INTO users (first_name, last_name, email, password, created_at) values (%(first_name)s, %(last_name)s, %(email)s, %(password)s, now());
+            INSERT INTO users (first_name, last_name, email, password, created_at) values (%(first_name)s, %(last_name)s, %(email)s, %(password)s, now(),now());
         """
         return connectToMySQL(db_schema).query_db(query, data)
 
@@ -66,6 +66,18 @@ class Users:
     def get_email(cls, data):
         query = """
             SELECT * FROM users WHERE email = %(email)s;
+        """
+        result = connectToMySQL(db_schema).query_db(query, data)
+        # checking email if it's  already existed
+        if not result:
+            return None
+        return cls(result[0])
+    
+    @classmethod
+    def get_user(cls, id):
+        data = {"id" : id}
+        query = """
+            SELECT * FROM users WHERE id = %(id)s;
         """
         result = connectToMySQL(db_schema).query_db(query, data)
         # checking email if it's  already existed
