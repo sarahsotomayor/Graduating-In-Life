@@ -22,23 +22,26 @@ class Events:
         is_valid = True
         if len(data['name']) < 3:
             is_valid = False
-            flash("Name cannot be less than 3 characters", "recipe")
+            flash("Name cannot be less than 3 characters", "val_event")
         if len(data['description']) < 4:
             is_valid = False
-            flash("Description must be at least 4 characters", "recipe")
+            flash("Description must be at least 4 characters", "val_event")
         if len(data['location']) < 3: 
             is_valid = False
-            flash("Location must be at least 4 characters", "recipe")
+            flash("Location must be at least 4 characters", "val_event")
         return is_valid
 
 
     @classmethod
     def get_all_events(cls):
+        # query ="""
+        #     SElECT * FROM users LEFT JOIN events ON users.id = events.maker_id
+        # """
         query ="""
-            SElECT * FROM users JOIN events on users.id = events.maker_id
+            SElECT * FROM events LEFT JOIN users ON events.maker_id = users.id
         """
         result = connectToMySQL(db_schema).query_db(query)
-
+        print(f"\n ___get_all_events_RESULTS__{result}")
         all_events = []
         for row in result: 
             one_user = Users({
@@ -50,7 +53,8 @@ class Events:
                 "updated_at":row["users.updated_at"]
             })
             one_events = Events({
-                "id": row["events.id"],
+                # "id": row["events.id"],
+                "id": row["id"],
                 "name": row["name"],
                 "date":row["date"],
                 "time":row["time"],

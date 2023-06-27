@@ -78,7 +78,7 @@
             method="post"
           >
 
-          {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+          {% with messages = get_flashed_messages(category_filter=['val_event']) %}
             {% if messages %}
               {% for message in messages %}
                   <p class="bg-warning text-danger">{{message}}</p>

@@ -11,8 +11,10 @@ def index():
 # Show All Events
 @app.route("/events")
 def all_events():
+    if 'user_id' not in session:
+        return redirect("/")
     data = {
-        "id" : session['user_id'],
+        "id" : session['user_id']
     }
     return render_template("events.html", all_events = events_methods.Events.get_all_events(), current_user = user_methods.Users.get_email(data))
 
