@@ -37,10 +37,10 @@ def logIn():
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")
 
-    if not bcrypt.check_password_hash(logIn_acc.password, request.form["password"]):
+    if not bcrypt.check_password_hash(user_in_db.password, request.form["password"]):
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")   
-    session["users_id"] = logIn_acc.id
+    session["users_id"] = user_in_db.id
     return redirect ("/events")
 
 @app.route("/logout")
