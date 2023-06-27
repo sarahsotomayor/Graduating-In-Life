@@ -2,7 +2,8 @@ from flask_app.config.mysqlconnection import connectToMySQL
 
 from flask_app.models.user_methods import Users
 
-db_schema = "Graduation_In_Life"
+
+db_schema = "graduation_in_life"
 
 class Events: 
     def __init__(self, data) :
@@ -43,15 +44,18 @@ class Events:
         result = connectToMySQL(db_schema).query_db(query)
         print(f"\n ___get_all_events_RESULTS__{result}")
         all_events = []
-        for row in result: 
+        for row in result:
+            print("\n User constructor") 
             one_user = Users({
                 "id":row["users.id"],
                 "first_name":row["first_name"],
                 "last_name":row["last_name"],
+                "email":row["email"],
                 "password": " ",
                 "created_at":row["users.created_at"],
                 "updated_at":row["users.updated_at"]
             })
+            print("\n event  constructor") 
             one_events = Events({
                 # "id": row["events.id"],
                 "id": row["id"],
@@ -60,8 +64,9 @@ class Events:
                 "time":row["time"],
                 "location":row["location"],
                 "description":row["description"],
-                "created_at": row["events.created_at"],
-                "updated_at":row["events.updated_at"]
+                "maker_id" : row["maker_id"],
+                "created_at": row["created_at"],
+                "updated_at":row["updated_at"]
             })
             one_events.creator = one_user
             all_events.append(one_events)
@@ -71,7 +76,7 @@ class Events:
     @classmethod
     def save(cls, data):
         query = """
-            INSERT INTO events(name, date, time, location, description, maker_id, created_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(description)s, %(maker_id)s, now());
+            INSERT INTO events(name, date, time, location, description, maker_id, created_at, updated_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(description)s, %(maker_id)s, now(), now());
         """
         return connectToMySQL(db_schema).query_db(query, data)
 
@@ -80,19 +85,20 @@ class Events:
         query = """
             UPDATE events SET name = %(name)s,
             date = %(date)s, time = %(time)s,
-            %(location)s, updated_at = now() where events.id = %(id)s;
+            location = %(location)s, description = %(description)s,
+             maker_id = %(maker_id)s WHERE events.id = %(id)s;
         """
         return connectToMySQL(db_schema).query_db(query,data)
 
     @classmethod 
     def destroy(cls, data):
-        query = """
-            DELETE FROM events where id = %(id)s;
-        """
+        print("\n ___Delete Event method called___")
+        query = "DELETE FROM events where id = %(id)s "
+        return connectToMySQL(db_schema).query_db(query, data)
 
     @classmethod
     def get_one_event(cls, data):
-            query = "SELECT * FROM events JOIN users ON events.user_id = users.id WHERE events.id=%(id)s;"
+            query = "SELECT * FROM events JOIN users ON events.maker_id = users.id WHERE events.id=%(id)s;"
             results = connectToMySQL(db_schema).query_db(query, data)
             event_object = cls(results[0])
             user_dictionary = {

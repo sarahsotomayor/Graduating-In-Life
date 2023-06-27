@@ -36,7 +36,7 @@ def create_event_process():
         print("Could Not Save Event")
         return redirect("/events/new")
     data={
-        "user_id" : session['user_id'],
+        "maker_id" : session['user_id'],
         "name" : request.form['name'],
         "date" : request.form['date'],
         "time" : request.form['time'],
@@ -49,7 +49,7 @@ def create_event_process():
 
 #Read One
 # View Event: user can only view event details if logged in
-@app.route("/events/<int:id>")
+@app.route("/events/view/<int:id>")
 def view_event(id):
     if 'user_id' not in session:
         return redirect("/")
@@ -57,7 +57,9 @@ def view_event(id):
     data = {
         "id" : id
     }
-    return render_template("view.html", event = events_methods.Events.get_one_event(data))
+    event = events_methods.Events.get_one_event(data)
+    event_organizer = user_methods.Users.get_user(event.maker_id)
+    return render_template("view.html", event = event, event_organizer = event_organizer )
 
 #Render  Update
 # todo add edit event template
@@ -73,7 +75,7 @@ def edit_event(id):
 
 #Update
 # Process Edit Event Form
-@app.route("/events/update/<int:id>", methods = ["POST"])
+@app.route("/update/<int:id>", methods = ["POST"])
 def edit_event_process(id):
     if 'user_id' not in session:
         return redirect("/")
@@ -84,7 +86,7 @@ def edit_event_process(id):
         "time" : request.form['time'],
         "location" : request.form['location'],
         "description" : request.form['description'],
-        "user_id" : request.form['user_id']
+        "maker_id" : request.form['maker_id']
     }
     events_methods.Events.update_events(data)
     print("request.form", request.form)
@@ -92,7 +94,7 @@ def edit_event_process(id):
 
 
 # Delete Event
-@app.route("/event/delete/<int:id>")
+@app.route("/events/delete/<int:id>")
 def delete_event(id):
     if 'user_id' not in session:
         return redirect("/")

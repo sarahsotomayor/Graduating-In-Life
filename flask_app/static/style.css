@@ -43,3 +43,7 @@ body {
 .create-form {
   margin: 30px;
 }
+.form-label {
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: underline;
+}

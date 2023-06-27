@@ -72,28 +72,31 @@
         <div class="home-p col-5">
 
         <h3 class="mb-5 mt-5 ">{{event.name}}</h3>
-        <p>event organizer: {{}}</p>
-        <!--  ^ want to implement this? -->
+        <p>event organizer: {{event_organizer.first_name}}</p>
+       
           <form 
             action="/event/{{id}}"
             class=" mt-5 mb-5"
             method="post"
            >
-            <div class="">
-              <label for="recipe_name" class="form-label">Location</label>
-              <p>{{event.location}}</p>
-            </div>
-            <div class="">
-              <label for="description" class="form-label">Description</label>
-            <p>{{event.description}}</p>
-            </div>
             
-              <label for="date" class="form-label">
-                date
+              <label for="name" class="form-label">Location:</label>
+              <p>{{event.location}}</p>
+            
+           
+              <label for="description" class="form-label">Description:</label>
+           
+              
+            <p>{{event.description}}</p>
+          
+                 <label for="date" class="form-label">
+              Date:
               </label>
-              <p>{event.date}</p>
+            
+       
+               <p>{{event.date}}</p>
                 <div class="">
-              <label for="time" class="form-label">Time</label>
+              <label for="time" class="form-label">Time:</label>
               <p>{{event.time}}</p>
 <button class="btn btn-secondary">Sign up for this event</button>
         </form>  
