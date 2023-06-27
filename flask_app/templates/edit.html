@@ -24,57 +24,58 @@
     <title>Graduating in life</title>
   </head>
   <body>
-    <div class="container">
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">GIL Events</a>
-          <!-- suggestion as logo can be just Home -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Create Event</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-              </li>
-            </ul>
-          </div>
+    <nav
+      class="navbar navbar-expand-lg bg-light navSize"
+      style="background-color: #8c757b"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand active" href="/">GIL</a>
+        <!-- suggestion as logo can be just Home -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events/new">Create Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+          </ul>
         </div>
-      </nav>
-
+      </div>
+    </nav>
+    <div class="container">
       <header>
         <h1 class="home-header">Edit your Senior Prom Event</h1>
       </header>
 
       <div class="home-main">
         <div class="col-6">
-          <form action="/edit" class="row g-3 mt-5 mb-5" method="post">
-            <input type="hidden" name="recipe_id" value="{{edit.id}}" />
+          <form action="/events/edit" class="row g-3 mt-5 mb-5" method="post">
+            <input type="hidden" name="event_id" value="{{id}}" />
             <div class="col-md-6">
               <label for="event_name" class="form-label">Event Name</label>
               <input
                 type="text"
                 name="name"
                 class="form-control"
-                id="recipe_name"
-                value="{{edit_event.name}}"
+                value="{{event.name}}"
               />
               <!--  value populates the form. submit updates it -->
             </div>
@@ -84,7 +85,7 @@
                 type="text"
                 name="location"
                 class="form-control"
-                value="{{edit_event.location}}"
+                value="{{event.location}}"
               />
             </div>
             <div class="col">
@@ -92,16 +93,10 @@
               <textarea
                 name="description"
                 class="form-control"
-                value="{{edit_event.description}}"
+                value="{{event.description}}"
                 cols="20"
                 rows="3"
               ></textarea>
-              <input
-                type="textarea"
-                name="description"
-                class="form-control"
-                value="{{edit_event.description}}"
-              />
             </div>
             <label for="date" class="form-label">Date </label>
             <input type="date" name="date_made" value="{{edit_event.date}}" />
@@ -111,7 +106,7 @@
               class="col-3 me-3"
               type="time"
               name="time"
-              value="{{edit_event.time}}"
+              value="{{event.time}}"
             />
 
             <button class="btn btn-secondary col-4">Edit</button>
@@ -124,5 +119,8 @@
         />
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
   </body>
 </html>

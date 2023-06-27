@@ -17,44 +17,47 @@
     <title>Graduating in life</title>
   </head>
   <body>
-    <div class="container">
-      <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">GIL </a>
-          <!-- suggestion as logo can be just Home -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Events</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Create Event</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-              </li>
-            </ul>
-          </div>
+    <nav
+      class="navbar navbar-expand-lg bg-light navSize"
+      style="background-color: #8c757b"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">GIL</a>
+        <!-- suggestion as logo can be just Home -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/events">Events</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/events/new">Create Event</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
+    <div class="container">
       <header>
         <h1 class="home-header">List of Available Events</h1>
       </header>
-      <h3 class="mt-5 mb-5">Welcome, {{one_user.first_name}}</h3>
+      <h3 class="mt-5 mb-5">Welcome, {{session.first_name}}</h3>
 
       <!-- table-->
       <table class="table table-hover mt-5 mb-5">
@@ -68,17 +71,17 @@
         </thead>
         <!-- !!!!Names may have to change to match backend!!!!!-->
         <tbody>
-          {% for one_event in events %}
+          {% for event in all_events %}
           <tr>
-            <th scope="row">{{one_event.name}}</th>
-            <td>{{one_event.details}}</td>
+            <th scope="row">{{event.name}}</th>
+            <td>{{event.description}}</td>
 
             <td>
-              <a href="/view/{{one_event.id}}">View </a>| {% if
-              session['user_id'] == one_event.user.id %}
-              <a href="/edit/{{one_event.id}}">Edit </a>|
+              <a href="/view/{{event.id}}">View </a>| 
+              {% if session['user_id'] == event.user.id %}
+              <a href="/edit/{{event.id}}">Edit </a>|
 
-              <a href="/delete/{{one_event.id}}">Delete</a>
+              <a href="/delete/{{event.id}}">Delete</a>
               {% endif %}
             </td>
           </tr>
@@ -86,5 +89,8 @@
         </tbody>
       </table>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
   </body>
 </html>

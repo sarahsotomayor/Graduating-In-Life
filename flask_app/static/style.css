@@ -4,8 +4,11 @@
 }
 body {
   background-image: url(../static/images/pexels-pixabay-301673.jpg);
-  /* background-position: 0%; */
-  /* background: rgb(254, 197, 197); */
+}
+.navbar {
+  background-color: #8c757b !important;
+  font-size: 24px;
+  font-family: "Prata", serif;
 }
 .container {
   margin: 0 auto;

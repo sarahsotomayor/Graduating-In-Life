@@ -1,7 +1,16 @@
 from flask_app.config.mysqlconnection import connectToMySQL 
+from flask_app import app
 from flask import flash
+<<<<<<< HEAD
 import re 
+=======
+import re
+from flask_bcrypt import Bcrypt
+
+>>>>>>> feb91b3ad84c64bcd5f56f6629fb219c6b8af2a0
 regex_email = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
+
+bcrypt = Bcrypt(app)
 
 db_schema = "Graduation_In_Life"
 class Users: 
@@ -42,18 +51,18 @@ class Users:
             flash("Email Already Exist", "reg")
             return False
         if len(validation["email"]) < 1: 
-            flash("Email must not be blanke", "reg")
+            flash("Email must not be blank", "reg")
             isValid = False
         if not regex_email.match(validation["email"], "reg"):
             flash("Email does not match", "reg")
             isValid = False
         if len(validation["first_name"]) < 3 and len(validation["last_name"]) < 3: 
-            flash("First and Last name must be atleast 3 characters", "reg")
+            flash("First and Last name must be at least 3 characters", "reg")
         if len(validation["password"]) < 8:
-            flash("Password atleast 8 characters", "reg")
+            flash("Password at least 8 characters", "reg")
             isValid= False 
         if len(validation["password"]) != validation["confirmPassword"]:
-            flash("Password Dosen't match", "reg")
+            flash("Password Doesn't match", "reg")
             isValid = False
         return isValid
     
@@ -61,12 +70,18 @@ class Users:
     def get_email(cls, data):
         query = """
             SELECT * FROM users WHERE email = %(email)s;
-
         """
         result = connectToMySQL(db_schema).query_db(query, data)
         # checking email if it's  already existed
+<<<<<<< HEAD
         if len(result) < 1: 
             return False
         return cls(result)
 
+=======
+        if not result:
+            return None
+        return cls(result[0])
+        
+>>>>>>> feb91b3ad84c64bcd5f56f6629fb219c6b8af2a0
 
