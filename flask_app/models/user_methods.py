@@ -66,12 +66,11 @@ class Users:
     def get_email(cls, data):
         query = """
             SELECT * FROM users WHERE email = %(email)s;
-
         """
         result = connectToMySQL(db_schema).query_db(query, data)
         # checking email if it's  already existed
-        if len(result) < 1: 
-            return False
-        return cls(result)
+        if not result:
+            return None
+        return cls(result[0])
         
 

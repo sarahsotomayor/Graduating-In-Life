@@ -59,15 +59,15 @@ class Events:
                 "created_at": row["events.created_at"],
                 "updated_at":row["events.updated_at"]
             })
-        one_events.creator = one_user
-        all_events.append(one_events)
+            one_events.creator = one_user
+            all_events.append(one_events)
         return all_events
 
 
     @classmethod
     def save(cls, data):
         query = """
-            INSERT INTO events(name, date, time, location, description, created_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, now());
+            INSERT INTO events(name, date, time, location, description, maker_id, created_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(description)s, %(maker_id)s, now());
         """
         return connectToMySQL(db_schema).query_db(query, data)
 
