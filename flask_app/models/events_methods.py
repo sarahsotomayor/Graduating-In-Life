@@ -22,13 +22,13 @@ class Events:
         is_valid = True
         if len(data['name']) < 3:
             is_valid = False
-            flash("Name cannot be less than 3 characters", "recipe")
+            flash("Name cannot be less than 3 characters", "event")
         if len(data['description']) < 4:
             is_valid = False
-            flash("Description must be at least 4 characters", "recipe")
+            flash("Description must be at least 4 characters", "event")
         if len(data['location']) < 3: 
             is_valid = False
-            flash("Location must be at least 4 characters", "recipe")
+            flash("Location must be at least 4 characters", "event")
         return is_valid
 
 
