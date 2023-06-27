@@ -30,6 +30,7 @@ def get_all_events(cls):
             "id":row["users.id"],
             "first_name":row["first_name"],
             "last_name":row["last_name"],
+            "email":row["email"],
             "password": " ",
             "created_at":row["users.created_at"],
             "updated_at":row["users.updated_at"]

@@ -6,7 +6,7 @@ from flask_app.models import events_methods, user_methods
 # Homepage
 @app.route("/")
 def index():
-    return render_template("")
+    return render_template("homepage.html")
 
 
 # todo add events template showing all events
