@@ -5,7 +5,11 @@ from flask_app.models import events_methods, user_methods
 # Homepage
 @app.route("/")
 def index():
-    return render_template("homepage.html")
+    if 'user_id' in session:
+        current_user = user_methods.Users.get_user(session['user_id'])
+        return render_template("homepage.html", current_user = current_user)
+    else:
+        return render_template("homepage.html")
 
 #Read All
 # Show All Events
@@ -16,7 +20,7 @@ def all_events():
     data = {
         "id" : session['user_id']
     }
-    return render_template("events.html", all_events = events_methods.Events.get_all_events(), current_user = user_methods.Users.get_email(data))
+    return render_template("events.html", all_events = events_methods.Events.get_all_events(), current_user = user_methods.Users.get_user(session['user_id']))
 
 #Render Create
 # New Event Form
@@ -24,7 +28,9 @@ def all_events():
 def create_event():
     if 'user_id' not in session:
         return redirect("/")
-    return render_template("create.html")
+    current_user = user_methods.Users.get_user(session['user_id'])
+    return render_template("create.html", current_user = current_user)
+
 
 #Create
 # Process New Event Form
@@ -59,7 +65,8 @@ def view_event(id):
     }
     event = events_methods.Events.get_one_event(data)
     event_organizer = user_methods.Users.get_user(event.maker_id)
-    return render_template("view.html", event = event, event_organizer = event_organizer )
+    current_user = user_methods.Users.get_user(session['user_id'])
+    return render_template("view.html", event = event, event_organizer = event_organizer, current_user = current_user )
 
 #Render  Update
 # todo add edit event template
@@ -71,7 +78,8 @@ def edit_event(id):
     data = {
         "id" : id
     }
-    return render_template("edit.html", event = events_methods.Events.get_one_event(data))
+    current_user = user_methods.Users.get_user(session['user_id'])
+    return render_template("edit.html", event = events_methods.Events.get_one_event(data), current_user = current_user)
 
 #Update
 # Process Edit Event Form

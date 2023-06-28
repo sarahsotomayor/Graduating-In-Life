@@ -11,15 +11,18 @@ def register_user():
 @app.route("/register", methods=["POST"])
 def register():
 
-    create_acc = { 
-        "first_name":request.form["first_name"],
-        "last_name":request.form["last_name"],
-        "email":request.form["email"],
-        "password":bcrypt.generate_password_hash(request.form["password"])
-    }
-    users_id = user_methods.Users.save(create_acc)
-    session["user_id"] = users_id
-    return redirect("/events ")
+    if user_methods.Users.users_validation(request.form):
+        create_acc = { 
+            "first_name":request.form["first_name"],
+            "last_name":request.form["last_name"],
+            "email":request.form["email"],
+            "password":bcrypt.generate_password_hash(request.form["password"])
+        }
+        users_id = user_methods.Users.save(create_acc)
+        session["user_id"] = users_id
+        return redirect("/events ")
+    else:
+        return redirect("/register")
 
 @app.route("/login")
 def logIn_user():
@@ -27,20 +30,24 @@ def logIn_user():
 
 @app.route("/login", methods=["POST"])
 def logIn():
-    
+    print("\n___Check Login__")
+    print("\n___Request.form__", request.form)
     logIn_acc = { 
         "email":request.form["email"],
         "password":request.form["password"]
     }
     user_in_db = user_methods.Users.get_email(logIn_acc)
+    print("\n___ User_in_db __",user_in_db)
     if not user_in_db:
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")
 
-    if not bcrypt.check_password_hash(logIn_acc.password, request.form["password"]):
+    if not bcrypt.check_password_hash(user_in_db.password, request.form["password"]):
+        print("\n___Password Invalid__")
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")   
-    session["users_id"] = logIn_acc.id
+    print("\n___Login and Password valid???__")
+    session["user_id"] = user_in_db.id
     return redirect ("/events")
 
 @app.route("/logout")

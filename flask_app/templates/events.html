@@ -49,6 +49,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <li class="nav-item">
+              {% if 'user_id'in session %}
+              <p class="nav mt-2 ms-5">Welcome {{current_user.first_name}}</p>
+
+              {% endif %}
+            </li>
           </ul>
         </div>
       </div>
@@ -57,7 +63,7 @@
       <header>
         <h1 class="home-header">List of Available Events</h1>
       </header>
-      <h3 class="mt-5 mb-5">Welcome, {{session.first_name}}</h3>
+      <h3 class="mt-5 mb-5">Welcome, {{current_user.first_name}}</h3>
 
       <!-- table-->
       <table class="table table-hover mt-5 mb-5">

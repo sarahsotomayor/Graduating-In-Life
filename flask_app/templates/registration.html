@@ -69,7 +69,16 @@
 <div class=" mb-5  col-sm-6">
    <!--                REGISTRATION FORM             -->
           <h2>Register</h2>
-       
+        {% with messages = get_flashed_messages() %}
+        
+        {% if messages %}
+        
+        {% for message in messages %}
+
+        <h4>{{message}}</h4>
+        
+        {% endfor %} {% endif %} {% endwith %}
+
           <form action="/register" method="POST">
           <!-- FIRST NAME INPUT  -->
           <div class="mb-3">
@@ -113,8 +122,8 @@
 
           <!-- PASSWORD CONFIRMATION INPUT  -->
           <div class="mb-3 ">
-            <label for="conf_password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" name="conf_password" />
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" name="confirmPassword" />
           </div>
 
           <!-- SUBMIT REGISTRATION BUTTON  -->
