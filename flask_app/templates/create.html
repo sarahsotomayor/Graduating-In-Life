@@ -119,6 +119,11 @@
                 <label for="time">Select a time:</label>
 <input type="time" id="time" name="time">
             </div>
+            <div>
+              <input type="hidden" 
+              name="maker_id" 
+              value={{session.user_id}}>
+            </div>
             <button  
                 class="btn btn-secondary  ms-5">Create</button>
       </div>

@@ -34,7 +34,7 @@ class Events:
     @classmethod
     def get_all_events(cls):
         query ="""
-            SElECT * FROM events join users on events.maker_id = users.id;
+            SElECT * FROM events inner join users on events.maker_id = users.id;
         """
         result = connectToMySQL(db_schema).query_db(query)
         print("---A---")
@@ -46,19 +46,20 @@ class Events:
                 "id":row["users.id"],
                 "first_name":row["first_name"],
                 "last_name":row["last_name"],
+                "email":row["email"],
                 "password": " ",
                 "created_at":row["users.created_at"],
                 "updated_at":row["users.updated_at"]
             })
             one_events = Events({
-                "id": row["events.id"],
+                "id": row["id"],
                 "name": row["name"],
                 "date":row["date"],
                 "time":row["time"],
                 "location":row["location"],
                 "description":row["description"],
-                "created_at": row["events.created_at"],
-                "updated_at":row["events.updated_at"],
+                "created_at": row["created_at"],
+                "updated_at":row["updated_at"],
                 "maker_id":row["maker_id"]
             })
             one_events.creator = one_user
@@ -105,7 +106,7 @@ class Events:
     @classmethod
     def save(cls, data):
         query = """
-            INSERT INTO events(name, date, time, location, description, maker_id, created_at) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(description)s, %(maker_id)s, now());
+            INSERT INTO events(name, date, time, location, description, created_at, maker_id) VALUES (%(name)s, %(date)s, %(time)s, %(location)s, %(description)s, now() , %(maker_id)s);
         """
         return connectToMySQL(db_schema).query_db(query, data)
 

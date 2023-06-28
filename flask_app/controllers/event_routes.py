@@ -34,12 +34,13 @@ def create_event_process():
         print("Could Not Save Event")
         return redirect("/events/new")
     data={
-        "user_id" : session['user_id'],
+        
         "name" : request.form['name'],
         "date" : request.form['date'],
         "time" : request.form['time'],
         "location" : request.form['location'],
-        "description" : request.form['description'],
+        "description" : request.form['description'], 
+        "maker_id" : request.form['maker_id'],
     }
     events_methods.Events.save(data)
     print("Event Saved", "request.form", request.form)

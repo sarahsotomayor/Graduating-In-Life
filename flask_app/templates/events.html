@@ -57,7 +57,7 @@
       <header>
         <h1 class="home-header">List of Available Events</h1>
       </header>
-      <h3 class="mt-5 mb-5">Welcome, {{session.first_name}}</h3>
+      <h3 class="mt-5 mb-5">Welcome, {{current_user.first_name}}</h3>
 
       <!-- table-->
       <table class="table table-hover mt-5 mb-5">
@@ -73,12 +73,12 @@
         <tbody>
           {% for event in all_events %}
           <tr>
-            <th scope="row">{{event.creator.name}}</th>
+            <th scope="row">{{event.name}}</th>
             <td>{{event.description}}</td>
 
             <td>
               <a href="/view/{{event.id}}">View </a>| 
-              {% if session['user_id'] == event.user.id %}
+              {% if session['user_id'] == event.creator.id %}
               <a href="/edit/{{event.id}}">Edit </a>|
 
               <a href="/delete/{{event.id}}">Delete</a>
