@@ -29,18 +29,19 @@ def logIn_user():
 def logIn():
     
     logIn_acc = { 
-        "email":request.form["email"],
-        "password":request.form["password"]
+        "email":request.form["email"]
     }
     user_in_db = user_methods.Users.get_email(logIn_acc)
+
     if not user_in_db:
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")
 
-    if not bcrypt.check_password_hash(logIn_acc.password, request.form["password"]):
+    if not bcrypt.check_password_hash(user_in_db.password,request.form["password"] ):
         flash("Invalid Email / Password" , 'log')
         return redirect("/login")   
-    session["users_id"] = logIn_acc.id
+        
+    session["user_id"] = user_in_db.id
     return redirect ("/events")
 
 @app.route("/logout")

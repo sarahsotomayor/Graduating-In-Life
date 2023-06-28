@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-
+from flask import flash
 from flask_app.models.user_methods import Users
 
 db_schema = "Graduation_In_Life"
@@ -31,40 +31,14 @@ class Events:
             flash("Location must be at least 4 characters", "recipe")
         return is_valid
 
-<<<<<<< HEAD
-    all_events = []
-    for row in result: 
-        one_user = Users({
-            "id":row["users.id"],
-            "first_name":row["first_name"],
-            "last_name":row["last_name"],
-            "email":row["email"],
-            "password": " ",
-            "created_at":row["users.created_at"],
-            "updated_at":row["users.updated_at"]
-        })
-        one_events = Events({
-            "id": row["events.id"],
-            "name": row["name"],
-            "date":row["date"],
-            "time":row["time"],
-            "location":row["location"],
-            "description":row["description"],
-            "created_at": row["events.created_at"],
-            "updated_at":row["events.updated_at"]
-        })
-    one_events.creator = one_user
-    all_events.append(one_events)
-    return all_events
-=======
->>>>>>> feb91b3ad84c64bcd5f56f6629fb219c6b8af2a0
-
     @classmethod
     def get_all_events(cls):
         query ="""
-            SElECT * FROM users JOIN events on users.id = events.maker_id
+            SElECT * FROM events join users on events.maker_id = users.id;
         """
         result = connectToMySQL(db_schema).query_db(query)
+        print("---A---")
+        print(result)
 
         all_events = []
         for row in result: 
@@ -84,52 +58,49 @@ class Events:
                 "location":row["location"],
                 "description":row["description"],
                 "created_at": row["events.created_at"],
-                "updated_at":row["events.updated_at"]
+                "updated_at":row["events.updated_at"],
+                "maker_id":row["maker_id"]
             })
             one_events.creator = one_user
             all_events.append(one_events)
         return all_events
 
-<<<<<<< HEAD
-@classmethod
-def get_one_event(cls, data):
-    query = """
-        SELECT * FROM events 
-        JOIN users_has_events on users_has_events.event_id = users_has_events.user_id
-        LEFT JOIN users on users.id = users_has_events.user_id where events.id =%(id)s;
-    """
-    result = connectToMySQL(db_schema).query_db(query, data)
-    if result < 1: 
-        return False
+
+    @classmethod
+    def get_one_event(cls, data):
+        query = """
+            SELECT * FROM events 
+            JOIN users_has_events on users_has_events.event_id = users_has_events.user_id
+            LEFT JOIN users on users.id = users_has_events.user_id where events.id =%(id)s;
+        """
+        result = connectToMySQL(db_schema).query_db(query, data)
+        if result < 1: 
+            return False
+        
+        result = result[0]
+        one_event = Events({
+            "id":result["events.id"],
+            "name":result["name"],
+            "date":result["date"],
+            "time":result["time"],
+            "location":result["location"],
+            "description":result["description"],
+            "created_at":result["events.created_at"],
+            "updated_at":result["events.updated_at"],
+        })
     
-    result = result[0]
-    one_event = Events({
-        "id":result["events.id"],
-        "name":result["name"],
-        "date":result["date"],
-        "time":result["time"],
-        "location":result["location"],
-        "description":result["description"],
-        "created_at":result["events.created_at"],
-        "updated_at":result["events.updated_at"],
-    })
-
-    event = Events(one_event)
-    for row in result: 
-        event.creator.append(cls(row))
-    return event
+        event = Events(one_event)
+        for row in result: 
+            event.creator.append(cls(row))
+        return event
 
 
-
-
-@classmethod 
-def destroy(cls, data):
-    query = """
-        DELETE FROM events where id = %(id)s;
-    """
-    return connectToMySQL(db_schema).query_db(query, data)
-=======
->>>>>>> feb91b3ad84c64bcd5f56f6629fb219c6b8af2a0
+    @classmethod 
+    def destroy(cls, data):
+        query = """
+            DELETE FROM events where id = %(id)s;
+        """
+        return connectToMySQL(db_schema).query_db(query, data)
 
     @classmethod
     def save(cls, data):
@@ -155,18 +126,18 @@ def destroy(cls, data):
 
     @classmethod
     def get_one_event(cls, data):
-            query = "SELECT * FROM events JOIN users ON events.user_id = users.id WHERE events.id=%(id)s;"
-            results = connectToMySQL(db_schema).query_db(query, data)
-            event_object = cls(results[0])
-            user_dictionary = {
-                        "id" : results[0]['users.id'],
-                        "first_name" : results[0]['first_name'],
-                        "last_name" : results[0]['last_name'],
-                        "email" : results[0]['email'],
-                        "password" : results[0]['password'],
-                        "created_at" : results[0]['users.created_at'],
-                        "updated_at" : results[0]['users.updated_at']
-                    }
-            user_object = Users(user_dictionary)
-            event_object.user = user_object
-            return event_object
+        query = "SELECT * FROM events JOIN users ON events.user_id = users.id WHERE events.id=%(id)s;"
+        results = connectToMySQL(db_schema).query_db(query, data)
+        event_object = cls(results[0])
+        user_dictionary = {
+                    "id" : results[0]['users.id'],
+                    "first_name" : results[0]['first_name'],
+                    "last_name" : results[0]['last_name'],
+                    "email" : results[0]['email'],
+                    "password" : results[0]['password'],
+                    "created_at" : results[0]['users.created_at'],
+                    "updated_at" : results[0]['users.updated_at']
+                }
+        user_object = Users(user_dictionary)
+        event_object.user = user_object
+        return event_object

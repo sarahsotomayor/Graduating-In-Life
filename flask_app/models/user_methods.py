@@ -1,13 +1,13 @@
 from flask_app.config.mysqlconnection import connectToMySQL 
 from flask_app import app
 from flask import flash
-<<<<<<< HEAD
+
 import re 
-=======
-import re
+
+
 from flask_bcrypt import Bcrypt
 
->>>>>>> feb91b3ad84c64bcd5f56f6629fb219c6b8af2a0
+
 regex_email = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 bcrypt = Bcrypt(app)
@@ -69,19 +69,26 @@ class Users:
     @classmethod
     def get_email(cls, data):
         query = """
-            SELECT * FROM users WHERE email = %(email)s;
+            select * from users where email = %(email)s;
         """
         result = connectToMySQL(db_schema).query_db(query, data)
         # checking email if it's  already existed
-<<<<<<< HEAD
-        if len(result) < 1: 
-            return False
-        return cls(result)
-
-=======
-        if not result:
-            return None
-        return cls(result[0])
+        print(result)
         
->>>>>>> feb91b3ad84c64bcd5f56f6629fb219c6b8af2a0
+        if len(result) <= 1:
+            return False
+        return cls(result[0])
+
+    @classmethod
+    def get_by_id(cls, data):
+        query = """
+            SELECT * FROM users where id = %(id)s;
+
+        """
+        result = connectToMySQL(db_schema).query_db(query, data)
+        return cls(result[0])
+
+
+        
+
 

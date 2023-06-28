@@ -14,7 +14,7 @@ def all_events():
     data = {
         "id" : session['user_id'],
     }
-    return render_template("events.html", all_events = events_methods.Events.get_all_events(), current_user = user_methods.Users.get_email(data))
+    return render_template("events.html", all_events = events_methods.Events.get_all_events(), current_user = user_methods.Users.get_by_id(data))
 
 #Render Create
 # New Event Form
