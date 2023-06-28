@@ -48,4 +48,9 @@ body {
 }
 .welcome {
   text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.row-details {
+  width: 42% !important;
 }

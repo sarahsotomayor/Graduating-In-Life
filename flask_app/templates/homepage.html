@@ -61,12 +61,13 @@
               <a class="nav-link" href="/login">Login</a>
               {% endif %}
             </li>
-            <li class="nav-item">
-              {% if 'user_id'in session %}
-              <p class="nav mt-2 ms-5">Welcome {{current_user.first_name}}</p>
-              {% endif %}
-            </li>
+            <li class="nav-item"></li>
           </ul>
+          {% if 'user_id'in session %}
+          <p class="navbar-text nav mt-2 ms-5">
+            Welcome {{current_user.first_name}}
+          </p>
+          {% endif %}
         </div>
       </div>
     </nav>
