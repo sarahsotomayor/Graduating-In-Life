@@ -72,7 +72,7 @@
         <div class="home-p col-5">
 
         <h3 class="mb-5 mt-5 ">{{event.name}}</h3>
-        <p>event organizer: {{event_organizer.first_name}}</p>
+        <p>Event Organizer: {{event_organizer.first_name}}</p>
        
           <form 
             action="/event/{{id}}"
@@ -92,7 +92,7 @@
                  <label for="date" class="form-label">
               Date:
               </label>
-               <p>{{event.date}}</p>
+               <p>{{event.date.strftime('%m/%d/%y')}}</p>
                 <div class="">
               <label for="time" class="form-label">Time:</label>
               <p>{{event.time}}</p>
