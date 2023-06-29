@@ -12,6 +12,10 @@
       type="text/css"
       href="{{ url_for('static',filename='style.css') }}"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Prata&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Graduating in life</title>
@@ -49,39 +53,50 @@
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <li class="nav-item">
+              {% if 'user_id'in session %}
+              <p class="nav mt-2 ms-5">Welcome {{current_user.first_name}}</p>
+
+              {% endif %}
+            </li>
           </ul>
         </div>
       </div>
     </nav>
+
     <div class="container">
       <header>
         <h1 class="home-header">List of Available Events</h1>
       </header>
-      <h3 class="mt-5 mb-5">Welcome, {{session.first_name}}</h3>
+      <h3 class="mt-5 mb-5">Welcome, {{current_user.first_name}}</h3>
 
       <!-- table-->
       <table class="table table-hover mt-5 mb-5">
         <thead>
           <tr class="table-secondary">
             <th scope="col">Event Name</th>
-            <th scope="col">Event Details</th>
+            <th scope="col-3 row-details">Event Details</th>
 
             <th scope="col">Actions</th>
           </tr>
         </thead>
-        <!-- !!!!Names may have to change to match backend!!!!!-->
+
         <tbody>
           {% for event in all_events %}
           <tr>
-            <th scope="row">{{event.name}}</th>
-            <td>{{event.description}}</td>
+            <th scope="row ">{{event.name}}</th>
+            <td class="row-details">{{event.description}}</td>
 
             <td>
-              <a href="/view/{{event.id}}">View </a>| {% if session['user_id']
-              == event.maker_id %}
-              <a href="/events/edit/{{event.id}}">Edit </a>|
+              <a class="welcome" href="/view/{{event.id}}">View </a>{% if
+              session['user_id'] == event.maker_id %} |<a
+                class="welcome"
+                href="/events/edit/{{event.id}}"
+              >
+                Edit </a
+              >|
 
-              <a href="/events/delete/{{event.id}}">Delete</a>
+              <a class="welcome" href="/events/delete/{{event.id}}">Delete</a>
               {% endif %}
             </td>
           </tr>

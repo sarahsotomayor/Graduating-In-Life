@@ -57,6 +57,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <li class="nav-item">
+              {% if 'user_id'in session %}
+              <p class="nav mt-2 ms-5">Welcome {{current_user.first_name}}</p>
+            
+              {% endif %}
+            </li>
           </ul>
         </div>
       </div>
@@ -72,8 +78,8 @@
         <div class="home-p col-5">
 
         <h3 class="mb-5 mt-5 ">{{event.name}}</h3>
-        <p>event organizer: {{event_organizer.first_name}}</p>
-       
+        <h5 class="form-label">Event organizer: </h5>
+       <p>{{event_organizer.first_name}} </p>
           <form 
             action="/event/{{id}}"
             class=" mt-5 mb-5"
