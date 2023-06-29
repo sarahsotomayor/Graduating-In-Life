@@ -35,9 +35,6 @@ class Events:
 
     @classmethod
     def get_all_events(cls):
-        # query ="""
-        #     SElECT * FROM users LEFT JOIN events ON users.id = events.maker_id
-        # """
         query ="""
             SElECT * FROM events LEFT JOIN users ON events.maker_id = users.id
         """
@@ -57,7 +54,6 @@ class Events:
             })
             print("\n event  constructor") 
             one_events = Events({
-                # "id": row["events.id"],
                 "id": row["id"],
                 "name": row["name"],
                 "date":row["date"],

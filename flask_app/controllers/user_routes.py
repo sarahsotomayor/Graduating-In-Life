@@ -4,10 +4,12 @@ bcrypt = Bcrypt(app)
 from flask_app.models import user_methods
 from flask import flash, session, render_template, redirect, request
 
+#REGISTER
 @app.route("/register")
 def register_user():
     return render_template("registration.html")
 
+#REGISTRATION PROCESS
 @app.route("/register", methods=["POST"])
 def register():
 
@@ -21,10 +23,12 @@ def register():
     session["user_id"] = users_id
     return redirect("/events ")
 
+#LOGIN
 @app.route("/login")
 def logIn_user():
     return render_template("login.html")
 
+#LOGIN PROCESS
 @app.route("/login", methods=["POST"])
 def logIn():
     
@@ -43,6 +47,7 @@ def logIn():
     session["users_id"] = user_in_db.id
     return redirect ("/events")
 
+#LOGOUT
 @app.route("/logout")
 def logout_user():
     if 'user_id' not in session:
